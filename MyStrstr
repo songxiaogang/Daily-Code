@@ -1,0 +1,52 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+#include<string.h>
+#include<assert.h>
+
+char *MyStrstr(char *dest, char *src)
+{
+	assert(dest);//断言表达式
+	assert(src);
+
+	char *p = dest;
+	char *q = src;
+	char *ret = NULL;//用来存放目标串的位置
+	char *end = p + strlen(p) - strlen(q) + 1;//起始位置加上目标串长度指向末位置，减去所要判断串长度相当于从右向左相同位置，再减一表示下一位
+
+	while (p < end)//起始位置大于end值，则不必判断，因为目标串未判断长度已经少于所要判断的长度了
+	{
+		//循环每次调用都要将ret指向p的位置，而q指向src的位置
+		ret = p;
+		q = src;
+		while (*ret && *q && (*ret == *q))
+		{
+			ret++;
+			q++;
+		}
+		if (*q == '\0')//所要判断的串已经指向最后位置，表示是目标串的子串
+			return p;
+
+		p++;
+	}
+	return 0;
+}
+	
+
+int main()
+{
+	
+	char *destination = "abcdefgh";
+	char *source ="abcd";
+	char *result;
+
+	result = MyStrstr(destination,source);
+
+	if(result ==0)
+		printf("该字符串不是目标串的子串...\n");
+	else
+		printf("子串起始于目标串的%s\n", result);
+
+
+	return 0;
+}
