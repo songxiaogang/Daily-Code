@@ -1,0 +1,67 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<Windows.h>
+
+//加减乘除功能函数
+int Add(int x, int y)
+{
+	return x + y;
+}
+
+int Sub(int x, int y)
+{
+	return x - y;
+}
+int Mul(int x, int y)
+{
+	return x * y;
+}
+int Div(int x, int y)
+{
+	return x / y;
+}
+
+
+int main(int argc, char *argv[], char *envp[])
+{
+	//将第三和第四个参数转换成字符串传入，因为argv是字符数组指针
+	int number1 = atoi(argv[2]);
+	int number2 = atoi(argv[3]);
+	int ret = 0;
+
+	if (argc != 4)//argc表示传参个数，传参个数不是四个则进行以下程序
+	{
+		printf("参数输入个数有误...\n");
+		return 1;
+	}
+
+	if (argv[1][0] == '-')//判断第二个参数的第一个元素是否是'-'符号
+	{
+		switch (argv[1][1])//判断第二个参数的第二个元素是a,s,m,d中哪一个来判断进行哪个运算
+		{
+		case 'a':
+			ret = Add(number1, number2);
+			break;
+		case 's':
+			ret = Sub(number1, number2);
+			break;
+		case 'm':
+			ret = Mul(number1, number2);
+			break;
+		case 'd':
+			ret = Div(number1, number2);
+			break;
+		default:
+			printf("第二个参数输入有误...");
+			break;
+
+		}
+	}
+
+	printf("result= %d\n", ret);
+
+	system("pause");
+	return 0;
+}
