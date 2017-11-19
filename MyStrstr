@@ -47,6 +47,5 @@ int main()
 	else
 		printf("子串起始于目标串的%s\n", result);
 
-
 	return 0;
 }
