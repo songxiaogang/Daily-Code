@@ -1,0 +1,39 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+#include<assert.h>
+#include<Windows.h>
+
+char *MyStrcat(char *dest, char *src)
+{
+	assert(src);
+	assert(dest);
+	char *ret = dest;
+
+	while (*dest)
+	{
+		dest++;
+	}
+
+	while (*dest++ = *src++)
+	{
+		;
+	}
+	return ret;
+}
+	
+
+int main()
+{
+	
+	char *source = "jklmn";
+	char destination[32]="abcde";
+	char *result;
+
+	result=MyStrcat(destination,source);
+	printf("%s\n", result);
+
+	system("pause");
+
+	return 0;
+}
