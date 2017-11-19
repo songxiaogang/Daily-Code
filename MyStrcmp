@@ -43,7 +43,6 @@ int main()
 		else
 			printf("两个字符串一样大...\n");
 
-	
 
 	return 0;
 }
