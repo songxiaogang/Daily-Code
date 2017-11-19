@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+#include<assert.h>
+
+char *MyMemcpy(char dest[], char *src, int cou)
+{
+	assert(dest);//断言表达式
+	assert(src);
+
+	char *ret = dest;
+	int i = 0;
+
+	while (i<cou)
+	{
+		dest[i] = *src;
+		i++;
+		src++;
+	}
+
+	return ret;
+	
+}
+
+int main()
+{
+	
+	char destination[30] = "123world";
+	char *source = "hello";
+	int count = 0;
+	char *result;
+
+	printf("请输入你想复制的字符个数...");
+	scanf("%d", &count);
+
+	result = MyMemcpy(destination,source,count);
+	printf("Result is : %s\n", result);
+	
+	return 0;
+}
