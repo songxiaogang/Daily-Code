@@ -1,0 +1,31 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+#include<assert.h>
+#include<Windows.h>
+
+char *MyStrcpy(char *dest, char *src)
+{
+	assert(src);
+	char *ret = dest;
+	while (*dest++ = *src++)
+		;
+
+	return ret;
+}
+	
+
+
+int main()
+{
+	
+	char source[] = "abcdeada";
+	char destination[32];
+	char *result;
+
+	result = MyStrcpy(destination,source);
+	printf("%s\n", result);
+
+	system("pause");
+	return 0;
+}
