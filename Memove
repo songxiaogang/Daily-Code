@@ -1,0 +1,54 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+#include<stdio.h>
+#include<string.h>
+#include<assert.h>
+
+char *MyMemmove(char dst[], char *src, int cou)
+{
+	assert(dst);//断言表达式
+	assert(src);
+
+	char *ret = dst;
+	int dst_len = strlen(dst);
+	int src_len = strlen(src);
+
+	if(src< dst && src + cou > dst)//当源字符与目标字符串有重叠时进行如此判断
+	{
+		while(cou--)
+		{
+			*(dst + dst_len - 1) = *(src + src_len - 1);
+			dst--;
+			src--;
+		}
+	}
+
+	else
+	{
+		while (cou--)
+		{
+			*dst = *src;
+			dst++;
+			src++;
+		}
+	}
+		
+	return ret;
+}
+
+int main()
+{
+	
+	char destination[30] = "123world";
+	char *source = "hello";
+	int count = 0;
+	char *result;
+
+	printf("请输入你想复制的字符个数...");
+	scanf("%d", &count);
+
+	result = MyMemmove(destination, source,count);
+	printf("Result is : %s\n", result);
+	
+	return 0;
+}
