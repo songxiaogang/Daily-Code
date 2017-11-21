@@ -93,7 +93,7 @@ int main()
 	//Bubble(fL, length, sizeof(float), CmpFL);
 	
 	while(i<length)
-	{
+	{ 
 		printf("%s\n", p[i]);
 		i++;
 	}
