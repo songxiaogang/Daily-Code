@@ -1,0 +1,102 @@
+
+#define _CRT_SECURE_NO_WARNINGS -1
+
+#include <stdio.h>
+#include<stdlib.h>
+#include <string.h>
+
+int CmpStr(void *p1, void *p2)//字符串比较
+{
+
+	return strcmp(*(char **)p1, *(char**)p2);//强转成二级字符指针，解一级引用取得字符串的地址，传入strcm函数进行比较。
+}
+
+int CmpNum(void *p1, void *p2)//整型数字比较
+{
+	int a = *(int*)p1;
+	int b = *(int*)p2;
+	return a > b ? 1 : a < b ? -1 : 0;
+}
+
+int CmpCh(void *p1, void *p2)//字符比较
+{
+
+	return *((char*)p1) - *((char*)p2);
+}
+
+int CmpFL(void *p1, void *p2)//单精度浮点数字比较
+{
+	float a = *(float*)p1;
+	float b = *(float*)p2;
+	return a > b ? 1 : a < b ? -1 : 0;
+}
+
+
+void Swap(void *p1, void *p2, int size)
+{
+	char tmp;
+	int i = 0;
+	while (i < size)//将变量的每一字节进行交换
+	{
+		tmp = *(char *)p1;
+ 		*(char *)p1 = *(char *)p2;
+		*(char *)p2 = tmp;
+		((char *)p1)++;
+		((char *)p2)++;
+		i++;
+	}
+	 
+}
+
+
+ 
+void Bubble(void *ptr, int ele_num, int type_len, int (*cmp)(void * ,void *))
+{
+	int i = 0;
+	int j = 0;
+	int flag = 0;//有序标记
+
+	for (i = 0; i < ele_num - 1; i++)
+	{
+		flag = 0;
+		for (j = 0; j < ele_num - 1 - i; j++)
+		{
+			if (cmp((char *)ptr + j * type_len, (char *)ptr + (j + 1) * type_len) > 0)
+			{
+				Swap((char *)ptr + j * type_len, (char *)ptr + (j + 1) * type_len, type_len);
+				flag = 1;//进行一次排序，flag置为1，表示该序列本身不是有序的
+			}
+		}
+		if (0 == flag)//第一次循环，没有进行一次交换，表示序列本身就是有序的 
+		{
+			return;
+		}
+	}
+	
+}
+
+int main()
+{
+	char *p[] = {"gabc","zbcd", "iyryr", "qeqw","nmczn","popop"};
+	//int num[] = { 123,567,890,2342,6466 };
+	//char ch[] = { 'b','g','p','a','u' };
+	//float fL[] = { 7.4f,7.6f,9.4f,3.2f,1.1f };//若不加f会报double到float截断，因为系统默认是double型
+
+
+	int i = 0;
+	int length = sizeof(p) / sizeof(p[0]);
+
+
+	Bubble(p, length, sizeof(char*), CmpStr);//字符串数组排序
+	//Bubble(num, length, sizeof(int), CmpNum);//数字排序
+	//Bubble(ch, length, sizeof(char), CmpCh);//字符排序
+	//Bubble(fL, length, sizeof(float), CmpFL);
+	
+	while(i<length)
+	{
+		printf("%s\n", p[i]);
+		i++;
+	}
+	
+	return 0;
+}
