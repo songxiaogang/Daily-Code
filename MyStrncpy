@@ -1,0 +1,35 @@
+#define _CRT_SECURE_NO_WARNINGS 
+
+#include <stdio.h>
+#include<assert.h>
+
+void MyStrncpy(char* dest, const char* src, int num)//此函数并没有判断用户要求复制长度否大于源串
+{
+	assert(src);
+
+	int i = 0;
+
+	while (i<num)
+	{
+		*(dest + i) = *(src + i);
+		i++;
+	}
+}
+
+
+int main()
+{
+	char *source = "abcdefg";
+	char destination[64] = { 0 };
+	int number = 0;//存放用户想复制的内容长度
+
+	printf("Input a number how many you want to copy...\n");
+	scanf("%d", &number);
+
+	MyStrncpy(destination, source, number);
+
+	printf("Destination bcome:");
+	printf("%s\n", destination);
+
+	return 0;
+}
